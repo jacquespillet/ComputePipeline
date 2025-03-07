@@ -38,6 +38,18 @@ This buffer is then passed throughout the pipeline to be for example :
 The final asset is then returned by the ComputePipeline::Execute() function.
 
 
+## Configuration : 
+```
+* Clone the repo
+git clone  https://github.com/jacquespillet/ComputePipeline.git
+cd ComputePipeline
+
+* Generate the solution and build
+mkdir build
+cmake -S . -B build
+cmake --build build --config Release
+```
+
 ## Error Handling
 
 The errors of execution in the pipeline are handled using error codes. 
