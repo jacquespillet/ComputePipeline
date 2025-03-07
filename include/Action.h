@@ -18,7 +18,7 @@ enum class Status {
  */
 struct ActionResult 
 {
-    // Wether the action was successful
+    // Whether the action was successful
     Status status;
     // Metadata for the action result
     std::string metadata;
@@ -39,7 +39,7 @@ public:
      * @brief Function that executes an action
      * 
      * @param asset Input ActionResult, containing the asset to process
-     * @return std::shared_ptr<const ActionResult> Output ActionResult, containing the processed asset
+     * @return std::shared_ptr<ActionResult> Output ActionResult, containing the processed asset
      */
     virtual std::shared_ptr<ActionResult> Execute(std::shared_ptr<const ActionResult> asset) = 0;
 };
@@ -62,7 +62,7 @@ public:
      * @brief Load the asset from disk
      * 
      * @param asset 
-     * @return std::shared_ptr<const ActionResult> 
+     * @return std::shared_ptr<ActionResult> 
      */
     virtual std::shared_ptr<ActionResult> Execute(std::shared_ptr<const ActionResult> asset) override;
 private: 
@@ -88,7 +88,7 @@ public:
      * @brief Decompress the asset
      * 
      * @param asset 
-     * @return std::shared_ptr<const ActionResult> 
+     * @return std::shared_ptr<ActionResult> 
      */
     virtual std::shared_ptr<ActionResult> Execute(std::shared_ptr<const ActionResult> asset) override;
 };
@@ -110,7 +110,7 @@ public:
      * @brief Decode the RawAsset into a ImageAsset
      * 
      * @param asset 
-     * @return std::shared_ptr<const ActionResult> 
+     * @return std::shared_ptr<ActionResult> 
      */
     virtual std::shared_ptr<ActionResult> Execute(std::shared_ptr<const ActionResult> asset) override;
 };
@@ -132,7 +132,7 @@ public:
      * @brief Parses the raw asset into a JsonAsset
      * 
      * @param asset 
-     * @return std::shared_ptr<const ActionResult> 
+     * @return std::shared_ptr<ActionResult> 
      */
     virtual std::shared_ptr<ActionResult> Execute(std::shared_ptr<const ActionResult> asset) override;
 };

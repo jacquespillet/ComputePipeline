@@ -47,8 +47,7 @@ class ImageAsset : public Asset
 public: 
     ImageAsset() = default;
     virtual ~ImageAsset() = default;
-private: 
-    // Pixel of the image
+private:
     std::vector<uint8_t> m_pixels;
 };
 
@@ -58,7 +57,7 @@ private:
  */
 class JsonAsset : public Asset 
 {
-public: 
+public:
     JsonAsset() = default;
     virtual ~JsonAsset() = default;
 private:

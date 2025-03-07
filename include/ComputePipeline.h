@@ -8,9 +8,7 @@
 
 namespace Pipeline
 {
-class Action;
 struct ActionResult;
-
 /**
  * @brief This class represents a pipeline of actions that will be executed in sequence.
  * 
@@ -27,14 +25,16 @@ public:
      * @param action 
      * @return ComputePipeline& 
      */
-    ComputePipeline &AddAction(std::shared_ptr<Action> action);
-
+    ComputePipeline &AddAction(const std::shared_ptr<Action>& action);
     /**
      * @brief Execute the pipeline
      * 
-     * @return std::shared_ptr<Asset> final asset after all actions have been executed. Returns nullptr if an action fails.
+     * This method executes each action in the pipeline sequentially. An action is considered to have failed if it returns an error status.
+     * If any action fails, the pipeline execution stops immediately
+     * 
+     * @return std::shared_ptr<ActionResult> final result after all actions have been executed.
      */
-    std::shared_ptr<ActionResult> Execute();
+    std::shared_ptr<ActionResult> Execute() const;
 
 private: 
 

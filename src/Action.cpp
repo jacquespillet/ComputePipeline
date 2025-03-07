@@ -1,6 +1,5 @@
-#include <iostream>
-
 #include <Action.h>
+#include <iostream>
 #include <Loader.h>
 #include <Asset.h>
 namespace Pipeline 
@@ -13,8 +12,15 @@ std::shared_ptr<ActionResult> LoadFileContent::Execute(std::shared_ptr<const Act
     std::cout << "Loading file content from " << m_path << std::endl;
     std::shared_ptr<ActionResult> result = std::make_shared<ActionResult>();
     result->asset = std::make_shared<RawAsset>(); //Create a raw asset which will hold the file content
-    bool success = Loader::LoadFileContent(m_path, std::dynamic_pointer_cast<RawAsset>(result->asset)->Data()); //Load the file content into the asset data
-    result->status = success ? Status::SUCCESS : Status::FILE_LOAD_FAILED;
+    auto rawAsset = std::dynamic_pointer_cast<RawAsset>(result->asset);
+    if (!rawAsset) {
+        std::cout << "LoadFileContent: Failed to cast to RawAsset" << std::endl;
+        result->status = Status::INVALID_INPUT;
+        result->metadata = "Invalid input";
+        result->asset = nullptr;
+        return result;
+    }
+    bool success = Loader::LoadFileContent(m_path, rawAsset->Data()); //Load the file content into the asset data
     result->metadata = "Loaded file content"; //Set the metadata
     return result;
 }
@@ -32,6 +38,7 @@ std::shared_ptr<ActionResult> Decompress::Execute(std::shared_ptr<const ActionRe
         std::cout << "Decompress: Invalid input" << std::endl;
         result->status = Status::INVALID_INPUT;
         result->metadata = "Invalid input";
+        result->asset = nullptr;
         return result;
     }
 
@@ -56,6 +63,7 @@ std::shared_ptr<ActionResult> DecodeImage::Execute(std::shared_ptr<const ActionR
         std::cout << "DecodeImage: Invalid input" << std::endl;
         result->status = Status::INVALID_INPUT;
         result->metadata = "Invalid input";
+        result->asset = nullptr;
         return result;
     }
     
@@ -81,6 +89,7 @@ std::shared_ptr<ActionResult> ObjectToJson::Execute(std::shared_ptr<const Action
         std::cout << "ObjectToJson: Invalid input" << std::endl;
         result->status = Status::INVALID_INPUT;
         result->metadata = "Invalid input";
+        result->asset = nullptr;
         return result;
     }
 

@@ -24,7 +24,7 @@ public:
      * @return true if success
      * @return false if failure
      */
-    static bool LoadFileContent(std::string assetPath, std::vector<uint8_t> &data);
+    static bool LoadFileContent(const std::string& assetPath, std::vector<uint8_t> &data);
 private:
     /**
      * @brief Reads a local file, paths starting with file://
@@ -34,7 +34,7 @@ private:
      * @return true if success
      * @return false if failure
      */
-    static bool ReadLocalFile(std::string assetPath, std::vector<uint8_t> &data);
+    static bool ReadLocalFile(const std::string &assetPath, std::vector<uint8_t> &data);
 
     
     /**
@@ -45,7 +45,7 @@ private:
      * @return true if success
      * @return false if failure
      */
-    static bool ReadHttpFile(std::string assetPath, std::vector<uint8_t> &data);
+    static bool ReadHttpFile(const std::string& assetPath, std::vector<uint8_t> &data);
 
     
     /**
@@ -56,6 +56,6 @@ private:
      * @return true if success
      * @return false if failure
      */
-    static bool ReadBundleFile(std::string assetPath, std::vector<uint8_t> &data);
+    static bool ReadBundleFile(const std::string& assetPath, std::vector<uint8_t> &data);
 };
 }
